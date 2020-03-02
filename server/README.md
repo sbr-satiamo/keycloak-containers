@@ -283,7 +283,7 @@ To run custom scripts on container startup place a file in the `/opt/jboss/start
 
 Two types of scripts are supported:
 
-* WildFly `.cli` [scripts](https://docs.jboss.org/author/display/WFLY/Command+Line+Interface)
+* WildFly `.cli` [scripts](https://docs.jboss.org/author/display/WFLY/Command+Line+Interface). In most of the cases, the scripts should operate in [offline mode](https://wildfly.org/news/tags/CLI/) (using `embed-server` instruction). It's also worth to mention, that by default, keycloak uses `standalone-ha.xml` configuration (unless other server configuration is specified).
 
 * Any executable (`chmod +x`) script
 
@@ -398,21 +398,6 @@ To set a fixed base URL for frontend requests use the following environment valu
 
 * `KEYCLOAK_FRONTEND_URL`: Specify base URL for Keycloak (optional, default is retrieved from request)
 
-### Specify hostname
-
-This environment variable is deprecated, use `KEYCLOAK_FRONTEND_URL` instead. 
-
-To set a fixed hostname for Keycloak use the following environment value. This is highly recommended in production.
-
-* `KEYCLOAK_HOSTNAME`: Specify hostname for Keycloak (optional, default is retrieved from request, recommended in production)
-
-### Specify ports
-
-To set fixed ports for http and https for Keycloak use the following environment values.
-
-* `KEYCLOAK_HTTP_PORT`: Specify the http port for Keycloak (optional, default is retrieved from request)
-* `KEYCLOAK_HTTPS_PORT`: Specify the https port for Keycloak (optional, default is retrieved from request)
-* `KEYCLOAK_ALWAYS_HTTPS`: Force to https (optional, default is retrieved from request)
 ### Specify log level
 
 There are two environment variables available to control the log level for Keycloak:
@@ -465,10 +450,7 @@ Once enabled, you should see the metrics values changing on the `/metrics` endpo
 
 ## Other details
 
-This image extends the [`jboss/base-jdk`](https://github.com/JBoss-Dockerfiles/base-jdk) image which adds the OpenJDK
-distribution on top of the [`jboss/base`](https://github.com/JBoss-Dockerfiles/base) image. Please refer to the README.md
-for selected images for more info.
-
+This image extends the [`registry.access.redhat.com/ubi8-minimal`](https://access.redhat.com/containers/?tab=overview#/registry.access.redhat.com/ubi8-minimal) base image and adds Keycloak and its dependencies on top of it.
 
 
 ## Building image with Keycloak from different sources
