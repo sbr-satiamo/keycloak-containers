@@ -14,11 +14,14 @@ ENV LANG en_US.UTF-8
 ARG GIT_REPO
 ARG GIT_BRANCH
 ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz
-ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/8.0.0/keycloak-8.0.0.tar.gz
+ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/9.0.0/keycloak-9.0.0.tar.gz
 
 USER root
 
 RUN microdnf update -y && microdnf install -y glibc-langpack-en gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
+
+ADD cli/TCPPING.cli /opt/jboss/tools/cli/jgroups/discovery/
+ADD cli/JDBC_PING.cli /opt/jboss/tools/cli/jgroups/discovery/
 
 ADD tools /opt/jboss/tools
 RUN /opt/jboss/tools/build-keycloak.sh
