@@ -26,7 +26,7 @@ ADD tools/cli/JDBC_PING.cli /opt/jboss/tools/cli/jgroups/discovery/
 ADD tools /opt/jboss/tools
 RUN /opt/jboss/tools/build-keycloak.sh
 
-COPY /opt/jboss/tools/add-iptable-rules.sh /usr/local/bin/add-iptable-rules.sh
+COPY tools/add-iptable-rules.sh /usr/local/bin/add-iptable-rules.sh
 RUN chmod +x /usr/local/bin/add-iptable-rules.sh 
 CMD add-iptable-rules.sh
 
