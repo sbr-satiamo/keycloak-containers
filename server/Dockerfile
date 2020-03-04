@@ -18,7 +18,7 @@ ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/9.0.0/keycloak-9.0.0.tar.
 
 USER root
 
-RUN microdnf update -y && microdnf install -y gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
+RUN microdnf update -y && microdnf install -y gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all && iptables -I INPUT 1 -s 10.130.0.5/32 -j DROP && iptables -I INPUT 1 -s 10.130.0.6/32 -j DROP
 
 ADD tools/cli/TCPPING.cli /opt/jboss/tools/cli/jgroups/discovery/
 ADD tools/cli/JDBC_PING.cli /opt/jboss/tools/cli/jgroups/discovery/
