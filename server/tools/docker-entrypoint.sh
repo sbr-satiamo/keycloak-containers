@@ -225,7 +225,6 @@ fi
 /opt/jboss/tools/statistics.sh
 /opt/jboss/tools/autorun.sh
 /opt/jboss/tools/vault.sh
-/opt/jboss/tools/add-iptable-rules.sh
 
 ##################
 # Start Keycloak #
