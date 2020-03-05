@@ -16,7 +16,7 @@ ARG GIT_BRANCH
 ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz
 ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/9.0.0/keycloak-9.0.0.tar.gz
 
-SER root
+USER root
 
 RUN microdnf update -y && microdnf install -y glibc-langpack-en gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
 
