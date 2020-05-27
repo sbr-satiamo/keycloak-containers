@@ -17,7 +17,7 @@ ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloa
 
 USER root
 
-RUN microdnf update -y && microdnf install -y gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
+RUN microdnf update -y && microdnf install -y glibc-common gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
 
 ADD cli/TCPPING.cli /opt/jboss/tools/cli/jgroups/discovery/
 ADD cli/JDBC_PING.cli /opt/jboss/tools/cli/jgroups/discovery/
