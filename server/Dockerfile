@@ -33,7 +33,7 @@ ADD cli/JDBC_PING.cli /opt/jboss/tools/cli/jgroups/discovery/
 ADD tools /opt/jboss/tools
 RUN /opt/jboss/tools/build-keycloak.sh
 
-USER jboss
+USER 1000
 
 EXPOSE 8080
 EXPOSE 8443
