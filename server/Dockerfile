@@ -1,6 +1,7 @@
 FROM registry.access.redhat.com/ubi7-minimal
 
-ENV KEYCLOAK_VERSION 10.0.0
+
+ENV KEYCLOAK_VERSION 10.0.1
 ENV JDBC_POSTGRES_VERSION 42.2.5
 ENV JDBC_MYSQL_VERSION 8.0.19
 ENV JDBC_MARIADB_VERSION 2.5.4
@@ -12,8 +13,9 @@ ENV PROXY_ADDRESS_FORWARDING true
 ENV JBOSS_HOME /opt/jboss/keycloak
 ENV LANG en_US.UTF-8
 
-ARG GIT_REPO
-ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz
+ARG GIT_REPO=keycloak/keycloak
+ARG GIT_BRANCH=master
+#ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz
 
 USER root
 
