@@ -1,13 +1,21 @@
 FROM registry.access.redhat.com/ubi7-minimal
 
-ENV KEYCLOAK_VERSION 9.0.3
+ENV KEYCLOAK_VERSION 10.0.1
 ENV JDBC_POSTGRES_VERSION 42.2.5
-ENV JDBC_MYSQL_VERSION 5.1.46
+ENV JDBC_MYSQL_VERSION 8.0.19
 ENV JDBC_MARIADB_VERSION 2.5.4
 ENV JDBC_MSSQL_VERSION 7.4.1.jre11
 
 ENV LAUNCH_JBOSS_IN_BACKGROUND 1
 ENV PROXY_ADDRESS_FORWARDING true
+ENV DB_ADDR keycloak-mysql
+ENV KEYCLOAK_USER admin
+ENV KEYCLOAK_PASSWORD pass
+
+ENV DB_PASSWORD changeit
+ENV DB_USER keycloak
+ENV DB_VENDOR mysql
+
 ENV JBOSS_HOME /opt/jboss/keycloak
 ENV LANG en_US.UTF-8
 
@@ -25,10 +33,11 @@ ADD cli/JDBC_PING.cli /opt/jboss/tools/cli/jgroups/discovery/
 ADD tools /opt/jboss/tools
 RUN /opt/jboss/tools/build-keycloak.sh
 
-USER 1000
+USER jboss
 
 EXPOSE 8080
 EXPOSE 8443
+
 
 ENTRYPOINT [ "/opt/jboss/tools/docker-entrypoint.sh" ]
 
