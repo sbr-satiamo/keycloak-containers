@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi7-minimal
+FROM jboss/base-jdk:8
 
 ENV KEYCLOAK_VERSION 10.0.1
 ENV JDBC_POSTGRES_VERSION 42.2.5
@@ -17,7 +17,7 @@ ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloa
 
 USER root
 
-RUN microdnf update -y && microdnf install -y glibc-common gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
+RUN yum update -y && yum install -y epel-release git && yum install -y jq openssl which && yum clean all
 
 ADD cli/TCPPING.cli /opt/jboss/tools/cli/jgroups/discovery/
 ADD cli/JDBC_PING.cli /opt/jboss/tools/cli/jgroups/discovery/
