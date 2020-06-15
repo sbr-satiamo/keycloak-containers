@@ -214,13 +214,17 @@ echo "  Using $DB_NAME database"
 echo ""
 echo "========================================================================="
 echo ""
+ALREADY_STARTED="/opt/jboss/ALREADY_STARTED"
+if [ ! -e $ALREADY_STARTED ]; then
+        touch $ALREADY_STARTED
+        ALREADY_STARTED=0
+	if [ "$DB_VENDOR" != "h2" ]; then
+		/bin/sh /opt/jboss/tools/databases/change-database.sh $DB_VENDOR
+	fi
 
-if [ "$DB_VENDOR" != "h2" ]; then
-    /bin/sh /opt/jboss/tools/databases/change-database.sh $DB_VENDOR
-fi
-
-/opt/jboss/tools/x509.sh
-/opt/jboss/tools/jgroups.sh
+	/opt/jboss/tools/x509.sh
+	/opt/jboss/tools/jgroups.sh
+fi	
 /opt/jboss/tools/infinispan.sh
 /opt/jboss/tools/statistics.sh
 /opt/jboss/tools/autorun.sh
