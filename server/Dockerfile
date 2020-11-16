@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8-minimal
+FROM registry.access.redhat.com/ubi7-minimal
 
 ENV KEYCLOAK_VERSION 11.0.3
 ENV JDBC_POSTGRES_VERSION 42.2.5
@@ -7,7 +7,7 @@ ENV JDBC_MARIADB_VERSION 2.5.4
 ENV JDBC_MSSQL_VERSION 7.4.1.jre11
 
 ENV LAUNCH_JBOSS_IN_BACKGROUND 1
-ENV PROXY_ADDRESS_FORWARDING false
+ENV PROXY_ADDRESS_FORWARDING true
 ENV JBOSS_HOME /opt/jboss/keycloak
 ENV LANG en_US.UTF-8
 
@@ -18,6 +18,9 @@ ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloa
 USER root
 
 RUN microdnf update -y && microdnf install -y glibc-langpack-en gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
+
+ADD cli/TCPPING.cli /opt/jboss/tools/cli/jgroups/discovery/
+ADD cli/JDBC_PING.cli /opt/jboss/tools/cli/jgroups/discovery/
 
 ADD tools /opt/jboss/tools
 RUN /opt/jboss/tools/build-keycloak.sh
