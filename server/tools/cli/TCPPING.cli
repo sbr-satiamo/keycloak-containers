@@ -15,5 +15,10 @@ batch
 
 /subsystem=jgroups/stack=tcp/transport=TCP/property=external_addr/:add(value=${env.JGROUPS_DISCOVERY_EXTERNAL_IP:127.0.0.1})
 
+# Add authentication
+echo SETUP: JGroups: Enable authentication
+# Note: The AUTH module needs full configuration on insert
+/subsystem=jgroups/stack=custom-tcp/protocol=AUTH:add(properties={auth_class=org.jgroups.auth.MD5Token,token_hash=SHA,auth_value="${env.KEYCLOAK_JGROUPS_AUTH_PASSWORD:changeme2}"})
+
 run-batch
 stop-embedded-server

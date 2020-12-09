@@ -11,11 +11,15 @@ ENV PROXY_ADDRESS_FORWARDING true
 ENV JBOSS_HOME /opt/jboss/keycloak
 ENV LANG en_US.UTF-8
 
+ENV JAVA_OPTS -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -XX:+UseContainerSupport -XX:InitialRAMPercentage=80 -XX:MaxRAMPercentage=80
+
 ARG GIT_REPO
 ARG GIT_BRANCH
 ARG KEYCLOAK_DIST=https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz
 
 USER root
+
+RUN ln -f -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 RUN microdnf update -y && microdnf install -y gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
 
