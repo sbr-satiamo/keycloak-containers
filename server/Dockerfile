@@ -10,6 +10,20 @@ ENV LAUNCH_JBOSS_IN_BACKGROUND 1
 ENV PROXY_ADDRESS_FORWARDING true
 ENV JBOSS_HOME /opt/jboss/keycloak
 ENV LANG en_US.UTF-8
+ENV DB_ADDR changeme:3306,changeme2:3306
+ENV DB_DATABASE keycloak
+ENV DB_PASSWORD changeme
+ENV DB_VENDOR mysql
+ENV JDBC_PARAMS useSSL=false&failOverReadOnly=false
+ENV JGROUPS_DISCOVERY_EXTERNAL_IP changeme
+ENV JGROUPS_DISCOVERY_PROPERTIES initial_hosts="changeme[7600],changeme[7600]"
+ENV JGROUPS_DISCOVERY_PROTOCOL TCPPING
+ENV KEYCLOAK_ALWAYS_HTTPS true
+ENV KEYCLOAK_HOSTNAME changeme
+ENV KEYCLOAK_LOGLEVEL INFO
+ENV ROOT_LOGLEVEL INFO
+
+
 
 ENV JAVA_OPTS -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -XX:+UseContainerSupport -XX:InitialRAMPercentage=80 -XX:MaxRAMPercentage=80
 
